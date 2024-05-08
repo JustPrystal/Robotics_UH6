@@ -1,0 +1,68 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/robotstadium/protos/RobotstadiumSoccerField.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/BrushedAluminium.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  fieldOfView 1
+  orientation 0.3893996275773691 0.009803775910422353 -0.9210167295008841 3.095224741727032
+  position 7.446614880088383 -1.2736763241382913 4.70746271501101
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+DEF Ball Robot {
+  translation -0.64 0 0.05
+  children [
+    Emitter {
+      name "ball-emitter"
+      type "infra-red"
+      range 10
+      maxRange 10
+    }
+    Shape {
+      appearance Appearance {
+        material Material {
+          ambientIntensity 0
+        }
+      }
+      geometry Sphere {
+        radius 0.05
+      }
+    }
+  ]
+  name "ball"
+  controller "soccer-ball"
+}
+RobotstadiumSoccerField {
+}
+DEF GOALIE Robot {
+  translation -0.95 0 0.15
+  children [
+    Receiver {
+      name "ball-reciever"
+      type "infra-red"
+    }
+    DistanceSensor {
+      name "distance_sensor"
+    }
+    Shape {
+      appearance BrushedAluminium {
+      }
+      geometry Box {
+        size 0.3 0.3 0.3
+      }
+    }
+  ]
+  name "Goalie"
+  controller "goalie"
+}
+DEF SUPERVISOR Robot {
+  controller "supervisor"
+  supervisor TRUE
+}
