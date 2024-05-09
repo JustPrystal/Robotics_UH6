@@ -3,14 +3,13 @@
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/robotstadium/protos/RobotstadiumSoccerField.proto"
-EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/BrushedAluminium.proto"
 
 WorldInfo {
 }
 Viewpoint {
   fieldOfView 1
-  orientation -0.2071272789730289 0.663845189264369 0.7186152343193005 0.8192480045355776
-  position -1.9182664037227786 -3.139734133655711 3.332657324384151
+  orientation 0.09050099320243613 -0.0004424611058183033 -0.9958962669161596 3.1513304888535387
+  position 0.31989253428645015 -0.04304566513446786 0.5384512691100426
 }
 TexturedBackground {
 }
@@ -19,12 +18,6 @@ TexturedBackgroundLight {
 DEF Ball Robot {
   translation 0.04 0 0.05
   children [
-    Emitter {
-      name "ball-emitter"
-      type "infra-red"
-      range 10
-      maxRange 10
-    }
     Shape {
       appearance Appearance {
         material Material {
@@ -59,26 +52,102 @@ DEF GoalLine Robot {
   ]
   name "goalline"
 }
-DEF GOALIE Robot {
-  translation -0.95 0 0.15
+Robot {
   children [
-    Receiver {
-      name "ball-reciever"
-      type "infra-red"
+    DEF PlayerBody Pose {
+      translation -0.96 0 0.17
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.9 0.5 0
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.3 0.3 0.3
+          }
+        }
+      ]
     }
-    DistanceSensor {
-      name "distance_sensor"
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor -0.96 0.16 0.08
+      }
+      device [
+        RotationalMotor {
+          name "motor_1"
+        }
+      ]
+      endPoint Solid {
+        translation -0.96 0.16 0.08
+        rotation 1 0 0 1.57
+        children [
+          DEF Wheel Shape {
+            appearance PBRAppearance {
+              baseColor 0 0 1
+              roughness 1
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.03
+              radius 0.08
+            }
+          }
+        ]
+        boundingObject USE Wheel
+        physics DEF wheel_physics Physics {
+        }
+      }
     }
-    Shape {
-      appearance BrushedAluminium {
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor -0.96 -0.16 0.08
       }
-      geometry Box {
-        size 0.3 0.3 0.3
+      device [
+        RotationalMotor {
+          name "motor_2"
+        }
+      ]
+      endPoint Solid {
+        translation -0.96 -0.16 0.08
+        rotation 1 0 0 1.57
+        children [
+          USE Wheel
+        ]
+        name "solid(1)"
+        boundingObject USE Wheel
+        physics USE wheel_physics
       }
+    }
+    Solid {
+      translation -0.8 0.08 0.25
+      children [
+        DEF eyes Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Sphere {
+            radius 0.018
+          }
+        }
+      ]
+      name "solid(2)"
+    }
+    Solid {
+      translation -0.8 -0.08 0.25
+      children [
+        USE eyes
+      ]
+      name "solid(3)"
     }
   ]
   name "Goalie"
-  controller "goalie"
+  boundingObject USE PlayerBody
+  physics Physics {
+  }
+  controller "<none>"
 }
 DEF SUPERVISOR Robot {
   controller "supervisor"

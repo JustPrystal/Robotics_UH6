@@ -8,7 +8,7 @@ import math
 supervisor = Supervisor()
 
 # Get all nodes
-robot_node = supervisor.getFromDef("GOALIE")
+robot_node = supervisor.getFromDef("PlayerBody")
 ball_node = supervisor.getFromDef("Ball")
 line_node = supervisor.getFromDef("GoalLine")
 
