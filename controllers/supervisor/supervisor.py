@@ -13,7 +13,7 @@ ball_node = supervisor.getFromDef("Ball")
 line_node = supervisor.getFromDef("GoalLine")
 
 # Main loop
-while supervisor.step(64) != -1:
+while supervisor.step(128) != -1:
     # Get the position of the robot
     robot_position = robot_node.getPosition()
     # Get the position of the ball

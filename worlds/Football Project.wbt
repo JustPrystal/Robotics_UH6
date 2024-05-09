@@ -8,8 +8,8 @@ WorldInfo {
 }
 Viewpoint {
   fieldOfView 1
-  orientation 0.09050099320243613 -0.0004424611058183033 -0.9958962669161596 3.1513304888535387
-  position 0.31989253428645015 -0.04304566513446786 0.5384512691100426
+  orientation 0.09704641584879595 -0.8969031620262797 -0.43144722865973245 5.791745494840013
+  position -3.562138112437036 -0.24752406272156202 1.5912495412232723
 }
 TexturedBackground {
 }
@@ -18,7 +18,7 @@ TexturedBackgroundLight {
 DEF Ball Robot {
   translation 0.04 0 0.05
   children [
-    Shape {
+    DEF ballSphere Shape {
       appearance Appearance {
         material Material {
           ambientIntensity 0
@@ -30,6 +30,10 @@ DEF Ball Robot {
     }
   ]
   name "ball"
+  boundingObject USE ballSphere
+  physics Physics {
+    mass 1
+  }
   controller "soccer-ball"
 }
 RobotstadiumSoccerField {
@@ -53,6 +57,8 @@ DEF GoalLine Robot {
   name "goalline"
 }
 Robot {
+  translation 0 -0.2 0.17984
+  rotation 1 0 0 -1.57
   children [
     DEF PlayerBody Pose {
       translation -0.96 0 0.17
@@ -71,7 +77,9 @@ Robot {
     }
     HingeJoint {
       jointParameters HingeJointParameters {
-        anchor -0.96 0.16 0.08
+        position 56.1211339601632
+        axis 0 0 1
+        anchor -0.96 0.1 0.331
       }
       device [
         RotationalMotor {
@@ -79,8 +87,7 @@ Robot {
         }
       ]
       endPoint Solid {
-        translation -0.96 0.16 0.08
-        rotation 1 0 0 1.57
+        translation -0.959963019293156 0.09999494208084966 0.3309999702771004
         children [
           DEF Wheel Shape {
             appearance PBRAppearance {
@@ -101,7 +108,8 @@ Robot {
     }
     HingeJoint {
       jointParameters HingeJointParameters {
-        anchor -0.96 -0.16 0.08
+        axis 0 0 1
+        anchor -0.96 0.1 0.01
       }
       device [
         RotationalMotor {
@@ -109,8 +117,8 @@ Robot {
         }
       ]
       endPoint Solid {
-        translation -0.96 -0.16 0.08
-        rotation 1 0 0 1.57
+        translation -0.96 0.10003736339492576 0.010000112906892159
+        rotation 1 0 0 5.487189483500131e-07
         children [
           USE Wheel
         ]
@@ -120,7 +128,7 @@ Robot {
       }
     }
     Solid {
-      translation -0.8 0.08 0.25
+      translation -0.8 -0.08 0.09
       children [
         DEF eyes Shape {
           appearance PBRAppearance {
@@ -147,7 +155,7 @@ Robot {
   boundingObject USE PlayerBody
   physics Physics {
   }
-  controller "<none>"
+  controller "goalie"
 }
 DEF SUPERVISOR Robot {
   controller "supervisor"
