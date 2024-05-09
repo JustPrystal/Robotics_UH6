@@ -8,8 +8,8 @@ timestep = 64
 keyboard.enable(timestep)
 
 # Set up motor devices for the wheels
-left_motor = robot.getDevice('motor_1')  # Replace with your left wheel motor name
-right_motor = robot.getDevice('motor_2')  # Replace with your right wheel motor name
+left_motor = robot.getDevice('motor_1') 
+right_motor = robot.getDevice('motor_2')
 
 left_motor.setPosition(float('inf'))
 right_motor.setPosition(float('inf'))
@@ -19,6 +19,11 @@ right_motor.setVelocity(0.0)
 
 # Set up the maximum motor speed
 max_speed = 10  # Adjust as needed
+
+while robot.step(32) != -1:
+    key = keyboard.getKey()
+    if key == ord(' '):  # Check if the spacebar is pressed
+        break
 
 # Main loop
 while robot.step(timestep) != -1:

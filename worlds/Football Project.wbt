@@ -34,7 +34,7 @@ DEF Ball Robot {
   physics Physics {
     mass 1
   }
-  controller "soccer-ball"
+  controller "<none>"
 }
 RobotstadiumSoccerField {
 }

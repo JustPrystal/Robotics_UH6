@@ -2,18 +2,26 @@
 
 
 # Import necessary libraries
-from controller import Robot, Supervisor
+from controller import Robot, Supervisor,Keyboard
 import math
 
 supervisor = Supervisor()
+keyboard = Keyboard()
 
 # Get all nodes
 robot_node = supervisor.getFromDef("PlayerBody")
 ball_node = supervisor.getFromDef("Ball")
 line_node = supervisor.getFromDef("GoalLine")
 
+
+print("Press spacebar to start the simulation, use the W | A | S | D keys to move around and see the calculated distance in meters");
+while supervisor.step(32) != -1:
+    key = keyboard.getKey()
+    if key == ord(' '):  # Check if the spacebar is pressed
+        break
+
 # Main loop
-while supervisor.step(128) != -1:
+while supervisor.step(1000) != -1:
     # Get the position of the robot
     robot_position = robot_node.getPosition()
     # Get the position of the ball
@@ -43,7 +51,7 @@ while supervisor.step(128) != -1:
     goal_calculated_diff = goal_post_half_x
     
     if ball_position[1] != 0:
-        goal_calculated_diff = math.sqrt(ball_position[1]**2 + goal_post_half_x**2) #Hypotneuse
+        goal_calculated_diff = round(math.sqrt(ball_position[1]**2 + goal_post_half_x**2),2) #Hypotneuse
     
     distance_ball_goal_line -= (ball_radius + goal_calculated_diff)
     
