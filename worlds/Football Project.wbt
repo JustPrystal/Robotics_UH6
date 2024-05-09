@@ -9,15 +9,15 @@ WorldInfo {
 }
 Viewpoint {
   fieldOfView 1
-  orientation 0.3893996275773691 0.009803775910422353 -0.9210167295008841 3.095224741727032
-  position 7.446614880088383 -1.2736763241382913 4.70746271501101
+  orientation -0.2071272789730289 0.663845189264369 0.7186152343193005 0.8192480045355776
+  position -1.9182664037227786 -3.139734133655711 3.332657324384151
 }
 TexturedBackground {
 }
 TexturedBackgroundLight {
 }
 DEF Ball Robot {
-  translation -0.64 0 0.05
+  translation 0.04 0 0.05
   children [
     Emitter {
       name "ball-emitter"
@@ -40,6 +40,24 @@ DEF Ball Robot {
   controller "soccer-ball"
 }
 RobotstadiumSoccerField {
+}
+DEF GoalLine Robot {
+  translation 4.77 0 0
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+          diffuseColor 1 0 0
+          emissiveColor 1 0 0
+          specularColor 1 0 0
+        }
+      }
+      geometry Box {
+        size 0.53 1.5 0.001
+      }
+    }
+  ]
+  name "goalline"
 }
 DEF GOALIE Robot {
   translation -0.95 0 0.15

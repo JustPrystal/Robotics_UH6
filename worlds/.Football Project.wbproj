@@ -5,7 +5,7 @@ sceneTreePerspectives: 000000ff00000001000000030000001e000002d6000000fa010000000
 maximizedDockId: -1
 centralWidgetVisible: 1
 orthographicViewHeight: 1
-textFiles: 1 "controllers/soccer-ball/soccer-ball.py" "controllers/goalie/goalie.py" "controllers/supervisor/supervisor.py"
+textFiles: 2 "controllers/soccer-ball/soccer-ball.py" "controllers/goalie/goalie.py" "controllers/supervisor/supervisor.py"
 consoles: Console:All:All
 renderingDevicePerspectives: ROBOTIS OP2:Camera;1;1;0;0
 renderingDevicePerspectives: ROBOTIS OP3:Camera;0;0.671296;0.0153424;0
