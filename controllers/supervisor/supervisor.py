@@ -35,11 +35,11 @@ while supervisor.step(64) != -1:
     # Calculate distance between ball and goal post
     distance_ball_goal_line = round(math.sqrt((ball_position[0] - line_position[0])**2 + (ball_position[1] - line_position[1])**2 + (ball_position[2] - line_position[2])**2),2)
     
-    #only X matters because goalpost has one opening
+    #only X matters when y = 0 
     goal_post_half_x = 0.53 / 2
     goal_post_half_y = 1.5 / 2
     
-    #apply pythagoras theorem to get hypotneuse
+    #apply pythagoras theorem to get hypotneuse for when y != 0
     goal_calculated_diff = goal_post_half_x
     
     if ball_position[1] != 0:
