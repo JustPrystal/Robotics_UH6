@@ -22,7 +22,8 @@ max_speed = 10  # Adjust as needed
 
 while robot.step(32) != -1:
     key = keyboard.getKey()
-    if key == ord(' '):  # Check if the spacebar is pressed
+    
+    if key == 32:  # Check if the spacebar is pressed
         break
 
 # Main loop

@@ -17,7 +17,7 @@ line_node = supervisor.getFromDef("GoalLine")
 print("Press spacebar to start the simulation, use the W | A | S | D keys to move around and see the calculated distance in meters");
 while supervisor.step(32) != -1:
     key = keyboard.getKey()
-    if key == ord(' '):  # Check if the spacebar is pressed
+    if key == 32:  # Check if the spacebar is pressed
         break
 
 # Main loop
